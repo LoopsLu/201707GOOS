@@ -11,14 +11,17 @@ namespace GOOS_Sample.Controllers
 {
     public class BudgetController : Controller
     {
-        private IBudgetService budgetServiceStub;
+        private IBudgetService budgetService;
 
-        public BudgetController(IBudgetService budgetServiceStub)
+        public BudgetController(IBudgetService budgetService)
         {
-            this.budgetServiceStub = budgetServiceStub;
+            this.budgetService = budgetService;
         }
 
-        public BudgetController() { }
+        public BudgetController()
+        {
+            budgetService = new BudgetService();
+        }
 
         // GET: Budget
         public ActionResult Add()
@@ -28,15 +31,7 @@ namespace GOOS_Sample.Controllers
         [HttpPost]
         public ActionResult Add(BudgetAddViewModel model)
         {
-            /*
-            using (var dbcontext = new GOOSDbEntitiesProduction())
-            {
-                var budget = new Budget() { Amount = model.Amount, YearMonth = model.Month };
-                dbcontext.Budgets.Add(budget);
-                dbcontext.SaveChanges();
-            }
-            */
-            budgetServiceStub.Create(model);
+            budgetService.Create(model);
             ViewBag.Message = "added successfully";
             return View(model);
         }

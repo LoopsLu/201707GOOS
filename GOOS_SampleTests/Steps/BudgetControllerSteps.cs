@@ -15,10 +15,10 @@ namespace GOOS_SampleTests.Steps
     {
         private BudgetController _budgetController;
 
-        [BeforeScenario()]
+        [BeforeScenario]
         public void BeforeScenario()
         {
-            this._budgetController = new BudgetController();
+            _budgetController = new BudgetController();
         }
 
         [When(@"add a budget")]

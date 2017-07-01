@@ -9,25 +9,38 @@ namespace GOOS_Sample.Models
 {
     public class BudgetService : IBudgetService
     {
-        private IRepository<Budget> _budgetRepositoryStub;
+        private IRepository<Budget> _budgetRepository;
 
-        public BudgetService(IRepository<Budget> _budgetRepositoryStub)
+        public BudgetService(IRepository<Budget> _budgetRepository)
         {
-            this._budgetRepositoryStub = _budgetRepositoryStub;
+            this._budgetRepository = _budgetRepository;
         }
+
+        public event EventHandler Created;
+        public event EventHandler Updated;
 
         public void Create(BudgetAddViewModel model)
         {
-            /*
-            using (var dbcontext = new GOOSDbEntitiesProduction())
+            // var budget = new Budget() { Amount = model.Amount, YearMonth = model.Month };
+            // _budgetRepositoryStub.Save(budget);
+
+
+            var budget = this._budgetRepository.Read(x => x.YearMonth == model.Month);
+            if (budget == null)
             {
-                var budget = new Budget() { Amount = model.Amount, YearMonth = model.Month };
-                dbcontext.Budgets.Add(budget);
-                dbcontext.SaveChanges();
+                this._budgetRepository.Save(new Budget() { Amount = model.Amount, YearMonth = model.Month });
+
+                var handler = this.Created;
+                handler?.Invoke(this, EventArgs.Empty);
             }
-            */
-            var budget = new Budget() { Amount = model.Amount, YearMonth = model.Month };
-            _budgetRepositoryStub.Save(budget);
+            else
+            {
+                budget.Amount = model.Amount;
+                this._budgetRepository.Save(budget);
+
+                var handler = this.Updated;
+                handler?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

@@ -26,8 +26,13 @@ namespace GOOS_Sample.Controllers
         [HttpPost]
         public ActionResult Add(BudgetAddViewModel model)
         {
+            // If...else 放到service中寫，並且由service引發事件
+            // 而事件的委派內容由Controller決定
+            // 如果把if...else寫在controller中，有20個地方要用到，每一次都要加if...else
+            this.budgetService.Created += (sender, e) => { ViewBag.Message = "added successfully"; };
+            this.budgetService.Updated += (sender, e) => { ViewBag.Message = "updated successfully"; };
+
             budgetService.Create(model);
-            ViewBag.Message = "added successfully";
             return View(model);
         }
     }

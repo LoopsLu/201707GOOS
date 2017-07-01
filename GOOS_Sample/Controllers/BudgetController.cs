@@ -28,14 +28,15 @@ namespace GOOS_Sample.Controllers
         [HttpPost]
         public ActionResult Add(BudgetAddViewModel model)
         {
-            
+            /*
             using (var dbcontext = new GOOSDbEntitiesProduction())
             {
                 var budget = new Budget() { Amount = model.Amount, YearMonth = model.Month };
                 dbcontext.Budgets.Add(budget);
                 dbcontext.SaveChanges();
             }
-            
+            */
+            budgetServiceStub.Create(model);
             ViewBag.Message = "added successfully";
             return View(model);
         }

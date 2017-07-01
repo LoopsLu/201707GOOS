@@ -163,6 +163,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BudgetModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BudgetServiceTests.cs" />
     <Compile Include="Steps\BudgetControllerSteps.cs" />
     <Compile Include="Features\BudgetController.feature.cs">
       <AutoGen>True</AutoGen>

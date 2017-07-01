@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GOOS_Sample.Controllers;
+using GOOS_Sample.Models;
 using GOOS_Sample.Models.ViewModels;
 using GOOS_SampleTests.DataModelsForIntegrationTest;
 using System;
@@ -18,7 +19,7 @@ namespace GOOS_SampleTests.Steps
         [BeforeScenario]
         public void BeforeScenario()
         {
-            _budgetController = new BudgetController();
+            _budgetController = new BudgetController(new BudgetService());
         }
 
         [When(@"add a budget")]

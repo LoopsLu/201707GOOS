@@ -1,5 +1,6 @@
 ﻿using FluentAutomation;
 using GOOS_Sample.Models;
+using GOOS_Sample.Models.DataModels;
 using GOOS_SampleTests.DataModelsForIntegrationTest;
 using Microsoft.Practices.Unity;
 using System;
@@ -55,6 +56,7 @@ namespace GOOS_SampleTests.Steps.Common
         public static void RegisterDIContainer()
         {
             UnityContainer = new UnityContainer();
+            UnityContainer.RegisterType<IRepository<GOOS_Sample.Models.DataModels.Budget>, BudgetRepository>();
             UnityContainer.RegisterType<IBudgetService, BudgetService>();
         }
         public static IUnityContainer UnityContainer

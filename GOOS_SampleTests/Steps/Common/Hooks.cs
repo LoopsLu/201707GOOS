@@ -1,5 +1,7 @@
 ﻿using FluentAutomation;
+using GOOS_Sample.Models;
 using GOOS_SampleTests.DataModelsForIntegrationTest;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +49,18 @@ namespace GOOS_SampleTests.Steps.Common
         public static void SetBrowser()
         {
             SeleniumWebDriver.Bootstrap(SeleniumWebDriver.Browser.Chrome);
+        }
+
+        [BeforeTestRun()]
+        public static void RegisterDIContainer()
+        {
+            UnityContainer = new UnityContainer();
+            UnityContainer.RegisterType<IBudgetService, BudgetService>();
+        }
+        public static IUnityContainer UnityContainer
+        {
+            get;
+            set;
         }
     }
 }

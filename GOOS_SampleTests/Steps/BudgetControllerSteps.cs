@@ -3,11 +3,13 @@ using GOOS_Sample.Controllers;
 using GOOS_Sample.Models;
 using GOOS_Sample.Models.ViewModels;
 using GOOS_SampleTests.DataModelsForIntegrationTest;
+using GOOS_SampleTests.Steps.Common;
 using System;
 using System.Linq;
 using System.Web.Mvc;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using Microsoft.Practices.Unity;
 
 namespace GOOS_SampleTests.Steps
 {
@@ -19,7 +21,7 @@ namespace GOOS_SampleTests.Steps
         [BeforeScenario]
         public void BeforeScenario()
         {
-            _budgetController = new BudgetController(new BudgetService());
+            _budgetController = Hooks.UnityContainer.Resolve<BudgetController>();
         }
 
         [When(@"add a budget")]

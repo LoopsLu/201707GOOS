@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAutomation;
+using GOOS_SampleTests.PageObjects;
 
 namespace GOOS_SampleTests.PageObjects
 {
@@ -7,26 +8,29 @@ namespace GOOS_SampleTests.PageObjects
     {
         public BudgetCreatePage(FluentTest test) : base(test)
         {
+            this.Url = $"{PageContext.Domain}/budget/add";
         }
 
         internal BudgetCreatePage Amount(int amount)
         {
-            throw new NotImplementedException();
+            I.Enter(amount.ToString()).In("#amount");
+            return this;
         }
 
         internal BudgetCreatePage Month(string yearMonth)
         {
-            throw new NotImplementedException();
+            I.Enter(yearMonth).In("#month");
+            return this;
         }
 
-        internal BudgetCreatePage AddBudget()
+        internal void AddBudget()
         {
-            throw new NotImplementedException();
+            I.Click("input[type=\"submit\"]");
         }
 
-        internal BudgetCreatePage ShouldDisplay(object message)
+        internal void ShouldDisplay(string message)
         {
-            throw new NotImplementedException();
+            I.Assert.Text(message).In("#message");
         }
     }
 }

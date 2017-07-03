@@ -181,6 +181,7 @@
     <Compile Include="Steps\BudgetCreateSteps.cs" />
     <Compile Include="Steps\Common\Hooks.cs" />
     <Compile Include="BugdgetControllerTests.cs" />
+    <Compile Include="Steps\InsertTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
